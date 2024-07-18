@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deploy Voting DApp</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@truffle/contract/dist/truffle-contract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div id="deploy">
+        <h1>Deploy Voting DApp</h1>
+        <div>
+            <label for="titleInput">Title:</label>
+            <input type="text" id="titleInput" placeholder="Election Title">
+        </div>
+        <div>
+            <label for="option1Input">Option 1 Name:</label>
+            <input type="text" id="option1Input" placeholder="Option 1">
+        </div>
+        <div>
+            <label for="option2Input">Option 2 Name:</label>
+            <input type="text" id="option2Input" placeholder="Option 2">
+        </div>
+        <button onclick="deployContract()">Deploy Contract</button>
+        <p id="deployResult"></p>
+    </div>
+    
+
+    <h2>Deployed Contracts</h2>
+    <select id="deployedContracts" onchange="selectContract()">
+        <option value="">Select a contract</option>
+    </select>
+
+    <div id="contractOptions" style="display: none;">
+        <div>
+            <label for="contractTitle">Title:</label>
+            <input type="text" id="contractTitle" readonly>
+        </div>
+        <div>
+            <label for="contractOption1">Option 1:</label>
+            <input type="text" id="contractOption1" readonly>
+        </div>
+        <div>
+            <label for="contractOption2">Option 2:</label>
+            <input type="text" id="contractOption2" readonly>
+        </div>
+        <p id="deployResult"></p>
+    </div>
+
+    <div id="contractActions" style="display: none;">
+        <button onclick="voteForOption(1)">Vote for Option 1</button>
+        <button onclick="voteForOption(2)">Vote for Option 2</button>
+    </div>
+
+    <div id="closeContract" style="display: none;">
+        <button onclick="closeContract()">Close Voting Contract</button>
+    </div>
+  
+    <div id="viewResults" style="display: none;">
+        <button onclick="viewResults()">View Results</button>
+    </div>
+    
+
+    <script src="main.js"></script>
+</body>
+</html>
