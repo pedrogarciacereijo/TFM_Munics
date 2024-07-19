@@ -56,19 +56,29 @@ En primer lugar, es necesario compilar el contrato oraculo.sol y desplegarlo en 
 Dentro del Dockerfile se definen los procesos necesarios para preparar el contenedor para la ejecución del oráculo y del nodo de IPFS. Dentro del script.sh se definen las operaciones que realiza el contenedor una vez desplegado, como la generación de la swarm.key, la ejecución del oráculo y el nodo IPFS.
 
 Para crear la imagen del contenedor se utiliza el comando:
+```
+docker build -t nombre_imagen .
+```
 
 Para desplegar el contenedor e iniciar el oráculo se utiliza el comando:
+```
+docker run --name nombre_contenedor -p 8000:8000 nombre_imagen
+```
 
-Una vez desplegado el contenedor, se nos mostrará por pantalla los datos de la inicialización del nodo IPFS, como se puede ver en la Fig. ![containerOraculo](containerOraculo.png).
-
-El proceso comienza generando un par de claves ED25519 para la autenticación y encriptación, seguido de la identificación del peer en la red IPFS. Se inicializa un nodo IPFS en el directorio "/root/.ipfs". Posteriormente, se eliminan varias direcciones de bootstrap predeterminadas que se utilizan para descubrir otros peers en la red IPFS. Se clona el repositorio 'go-ipfs-swarm-key-gen', para generar una clave de swarm para la red privada. Luego, se inicia el proceso daemon de IPFS, mostrando las versiones utilizadas. La red de peers (swarm) está limitada a una red privada utilizando la clave de swarm generada. El nodo está escuchando conexiones en las direcciones IP 127.0.0.1 y 172.17.0.2 en el puerto TCP 4001, así como utilizando el protocolo 'p2p-circuit', anunciando su disponibilidad en las mismas direcciones y puerto.
+Una vez desplegado el contenedor, se nos mostrará por consola los datos de la inicialización del nodo IPFS. El proceso comienza generando un par de claves ED25519 para la autenticación y encriptación, seguido de la identificación del peer en la red IPFS. Se inicializa un nodo IPFS en el directorio "/root/.ipfs". Posteriormente, se eliminan varias direcciones de bootstrap predeterminadas que se utilizan para descubrir otros peers en la red IPFS. Se clona el repositorio 'go-ipfs-swarm-key-gen', para generar una clave de swarm para la red privada. Luego, se inicia el proceso daemon de IPFS, mostrando las versiones utilizadas. La red de peers (swarm) está limitada a una red privada utilizando la clave de swarm generada. El nodo está escuchando conexiones en las direcciones IP 127.0.0.1 y 172.17.0.2 en el puerto TCP 4001, así como utilizando el protocolo 'p2p-circuit', anunciando su disponibilidad en las mismas direcciones y puerto.
 
 ### Front-end
 Para levantar el front-end, en primer lugar es necesario asegurarse de que Node.js y npm se encuentran instalados en el equipo. Para instalar las dependencias del proyecto, se puede ejecutar el siguiente comando en el directorio raíz (voting-dapp):
+```
+npm install
+```
 
 Para levantar el front-end, es suficiente con ejecutar el siguiente comando:
+```
+node server.js
+```
 
-Esto levantará la aplicación web en el puerto 3000, como se puede ver en la Fig. 
+Esto levantará la aplicación web en el puerto 3000. 
 
 
 ## Licencia
