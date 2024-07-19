@@ -3,3 +3,9 @@
 /voting-dapp/node_modules
 /orbitdb-storage/orbitdb
 /orbitdb-storage/ipfs
+/pruebas-orbitdb/NodoPrincipal/ipfs
+/pruebas-orbitdb/NodoPrincipal/node_modules
+/pruebas-orbitdb/NodoPrincipal/orbitdb
+/pruebas-orbitdb/NodoSecundario/ipfs
+/pruebas-orbitdb/NodoSecundario/node_modules
+/pruebas-orbitdb/NodoSecundario/orbitdb

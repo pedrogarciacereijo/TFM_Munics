@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrbitDB Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input, button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>OrbitDB Records</h1>
+    <h2>Nodo principal Orbit DB</h2>
+    <h3>Puerto 3000</h3>
+    <div>
+        <input type="text" id="key" placeholder="Key">
+        <input type="text" id="value" placeholder="Value">
+        <button onclick="addRecord()">Add Record</button>
+    </div>
+    <ul id="recordsList"></ul>
+    <div>
+        <input type="text" id="searchValue" placeholder="Search by Value">
+        <button onclick="searchRecords()">Search</button>
+    </div>
+    <ul id="searchList"></ul>
+
+    <script>
+        async function fetchRecords() {
+            const response = await fetch('http://localhost:3000/records');
+            const records = await response.json();
+            const recordsList = document.getElementById('recordsList');
+            recordsList.innerHTML = '';
+            for (const record of records) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Key: ${record.key}, Value: ${record.value}`;
+                recordsList.appendChild(listItem);
+            }
+        }
+
+        async function addRecord() {
+            const key = document.getElementById('key').value;
+            const value = document.getElementById('value').value;
+            console.log(key);
+            console.log(value);
+            await fetch('http://localhost:3000/records', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ key, value })
+            });
+            document.getElementById('key').value = '';
+            document.getElementById('value').value = '';
+            fetchRecords();
+        }
+
+        async function searchRecords() {
+            const searchValue = document.getElementById('searchValue').value;
+            const response = await fetch(`http://localhost:3000/records/search?value=${searchValue}`);
+            const records = await response.json();
+            const searchList = document.getElementById('searchList');
+            searchList.innerHTML = '';
+            for (const [key, value] of Object.entries(records)) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${key}: ${JSON.stringify(value)}`;
+                searchList.appendChild(listItem);
+            }
+        }
+
+        // Fetch records on page load
+        fetchRecords();
+    </script>
+</body>
+</html>

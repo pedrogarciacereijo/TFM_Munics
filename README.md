@@ -1,5 +1,10 @@
 # Sistema de votación electrónica basado en blockchain
 
+El código de este repositorio está asociado con el Trabajo de Fin de Máster del Máster Inter-Universitario en Ciberseguridad de la UDC y UVigo, con los siguientes datos: 
+- Título: "Sistema de votación electrónica basado en blockchain"
+- Autor: Pedro García Cereijo
+- Tutores: Paula Fraga Lamas y Tiago Manuel Fernández Caramés
+- Dirección: Facultade de Informática, Camiño do Lagar de Castro, 6, 15008, A Coruña
 
 ## Importante
 Este trabajo es una prueba de concepto, así que la implementación actual no está pensada para ser usada directamente. El código está abierto a qué futuros desarrolladores puedan adaptarlo para sus necesidades específicas.
@@ -11,6 +16,8 @@ Este trabajo es una prueba de concepto, así que la implementación actual no es
 - `OrbitDB-Storage`: Los nodos OrbitDB funcionarán como almacenamiento descentralizado del sistema, almacenando las direcciones de los smart contracts desplegados.
 - `Oráculo`:  El oráculo permitirá conectar los smart contracts  con el mundo off-chain,  permitiendo el almacenamiento en IPFS de los votos.
 - `Voting-Dapp`:  La aplicación web que permitirá interactuar con todos los componentes.
+
+La carpeta `Pruebas-OrbitDB` se corresponde con las pruebas definidas en la sección 5.3 de la memoria, donde se prueba el correcto funcionamiento de varios nodos de OrbitDB simultáneos, y no forma parte del sistema final, por lo que se explica al final de este README.
 
 ## Instalación
 
@@ -80,6 +87,19 @@ node server.js
 
 Esto levantará la aplicación web en el puerto 3000. 
 
+## Escenario de pruebas de OrbitDB
+
+### Despliegue del escenario de Pruebas
+
+Para desplegar el escenario de las pruebas definidas en la sección 5.3 de la memoria, primero ejecutaremos el nodo principal utilizando el siguiente comando desde la carpeta /NodoPrincipal:
+```
+node server.js
+```
+Una vez ejecutado el nodo principal, modificaremos el código del nodo secundario para introducir la dirección del nodo principal, la cual ha sido mostrada en la consola como resultado del comando anterior. También introduciremos la dirección de la base de datos OrbitDB, que igualmente ha sido mostrada en la consola. Luego, ejecutaremos el siguiente comando:
+```
+node client.js
+```
+Después de desplegar ambos nodos, podremos acceder a ellos a través de los puertos 3000 y 3001, respectivamente. Esto nos permitirá interactuar con cada uno de los nodos de la base de datos OrbitDB mediante dos interfaces front-end.
 
 ## Licencia
 
