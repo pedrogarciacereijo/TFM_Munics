@@ -13,4 +13,4 @@ cd ipfs-swarm-key-gen/
 go run main.go > /root/.ipfs/swarm.key
 
 cd /app/
-python3 oraculoNodo.py & ipfs daemon
+ipfs daemon
