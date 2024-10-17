@@ -25,7 +25,7 @@ def handle_event_add_IPFS(event):
     sender = event['args']['_sender']
     cipher = event['args']['cipher']
 
-    print(f"Evento IPFS Add detectado - Remitente: {sender}")
+    print(f"\033[92mEvento IPFS Add detectado - Remitente: {sender}\033[0m")
 
     data = {}
     data['sender'] = sender
@@ -56,14 +56,18 @@ def handle_event_add_IPFS(event):
 def handle_event_cat_IPFS(event):
     sender = event['args']['_sender']
 
-    print(f"Evento IPFS Cat detectado - Remitente: {sender}")
+    print(f"\033[92mEvento IPFS Cat detectado - Remitente: {sender}\033[0m")
 
 
     api = Connect()
 
-    # Ejecutar una consulta a IPFS para comprobar que el objeto se ha subido correctamente
-    cid = dict[sender]
-    print("CID: " + cid)
+    # Intentar obtener el CID desde el diccionario
+    try:
+        cid = dict[sender]
+        print("CID: " + cid)
+    except KeyError:
+        print(f"Error: el remitente {sender} no se encuentra en el diccionario.")
+        return  # Termina la ejecución si no se puede obtener el CID
 
     path = "/ipfs/" + cid
     print("Path: " + path)
